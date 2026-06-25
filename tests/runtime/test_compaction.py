@@ -1511,14 +1511,14 @@ async def test_default_window_compacts_same_fill(monkeypatch: pytest.MonkeyPatch
 
 
 # ---------------------------------------------------------------------------
-# reduce_messages_to_budget — auth-free resume safety net (OMNI-143)
+# reduce_messages_to_budget — auth-free resume safety net
 # ---------------------------------------------------------------------------
 
 
 def test_reduce_messages_to_budget_truncates_without_llm() -> None:
     """An over-budget history is brought under budget with no LLM call.
 
-    The OMNI-143 resume safety net shrinks a cold-loaded history before it
+    The resume safety net shrinks a cold-loaded history before it
     reaches the harness, using only Layer 1 + Layer 3 (no summarization). Real
     tiktoken counting, tiny window, so truncation actually converges.
     """
@@ -1550,7 +1550,7 @@ def test_reduce_messages_to_budget_is_noop_when_under_budget() -> None:
 def test_reduce_messages_to_budget_reserves_system_token_budget() -> None:
     """`system_token_budget` shrinks the effective budget for the history.
 
-    Regression for the OMNI-143 resume net (Polly review on #1169): budgeting
+    Regression for the resume net (Polly review on #1169): budgeting
     only the history (system budget 0) could still overflow once the request
     prepends the system prompt + tool schemas. A history that fits with no
     overhead reserved must be reduced once a large system+tools budget is

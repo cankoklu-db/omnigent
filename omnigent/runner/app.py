@@ -8120,7 +8120,7 @@ def create_runner_app(
     ) -> list[dict[str, Any]]:
         """
         Shrink a cold-loaded (resumed / fresh-runner) history to fit the model's
-        context window before it reaches the harness (OMNI-143).
+        context window before it reaches the harness.
 
         A stateful harness can't self-compact a single oversized prompt, and a
         runner-side context overflow is now fatal (no proactive compaction since
@@ -8184,7 +8184,7 @@ def create_runner_app(
         )
         if reduced is not history:
             _logger.warning(
-                "OMNI-143: reduced oversized resume history for conv=%s "
+                "reduced oversized resume history for conv=%s "
                 "(%d → %d msgs, window=%d, reserved %d tok for system+tools) "
                 "before handing to the harness",
                 conv,
@@ -11137,7 +11137,7 @@ def create_runner_app(
             instructions=instructions,
         )
 
-        # OMNI-143: a cold-loaded history (resume / fresh runner) can exceed the
+        # A cold-loaded history (resume / fresh runner) can exceed the
         # model's window. Note the cold load here; the auth-free reduction runs
         # below, once instructions + tools are known, so it can reserve budget
         # for the whole request (see _guard_resume_history_budget).
@@ -11260,7 +11260,7 @@ def create_runner_app(
             and name not in _spec_names
         )
 
-        # OMNI-143: now that the system prompt + tools are assembled, reduce a
+        # Now that the system prompt + tools are assembled, reduce a
         # cold-loaded history to fit the WHOLE request (history + system + tools)
         # auth-free, before the harness sees it — it can't self-compact a single
         # oversized prompt and a runner overflow is now fatal. No-op on live

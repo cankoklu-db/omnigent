@@ -711,7 +711,7 @@ def reduce_messages_to_budget(
     context-window budget: Layer 1 (surgical clearing) then, if still over, Layer
     3 (truncate oldest). No summarization, no LLM client, no ``ConversationItem``.
 
-    This is the runner's resume safety net (OMNI-143). A cold-loaded /
+    This is the runner's resume safety net. A cold-loaded /
     reconstructed history can exceed the window, and a stateful harness cannot
     self-compact a single oversized prompt — runner-side overflow is now fatal.
     This shrinks the history before it reaches the harness without depending on
